@@ -1,0 +1,123 @@
+/* CSS untuk tampilan tab */
+.tab {
+    display: none;
+}
+
+.tabel_form{
+    text-align: center;
+}
+
+/* Gaya untuk tab menu */
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+li a:hover {
+    background-color: #555; /* Warna latar belakang saat dihover */
+}
+
+/* Gaya untuk form */
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Efek bayangan untuk elemen form */
+    border-radius: 5px; /* Border dengan sudut membulat */
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold; /* Teks label lebih tebal */
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px; /* Sudut membulat untuk input */
+}
+
+input[type="submit"] {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #555; /* Warna tombol saat dihover */
+}
+
+/* Gaya untuk tabel */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px; /* Jarak antara form dan tabel */
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px; /* Ruang padding yang lebih besar */
+    text-align: left;
+}
+
+th {
+    background-color: #333;
+    color: white;
+}
+
+/* Gaya untuk resume */
+p {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+span {
+    color: #333;
+}
+
+/* Responsif CSS */
+@media screen and (max-width: 600px) {
+    /* Penataan ulang elemen-elemen pada layar kecil */
+    ul {
+        text-align: center;
+    }
+
+    li {
+        float: none;
+        display: inline-block;
+    }
+
+    li a {
+        padding: 10px;
+    }
+
+    /* Menyempitkan lebar form pada layar kecil */
+    form {
+        max-width: 300px;
+    }
+}

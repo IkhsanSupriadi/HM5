@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registrasi dan List Pendaftar</title>
+    <style>
+        /* CSS untuk tampilan tab */
+        .tab {
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h1>Registrasi dan List Pendaftar</h1>
+    
+    <!-- Tab menu -->
+    <ul>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'Registrasi')">Registrasi</a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'ListPendaftar')">List Pendaftar</a></li>
+    </ul>
+    
+    <!-- Tab konten -->
+    <div id="Registrasi" class="tabcontent">
+        <h2 class="tabel_form">Form Registrasi</h2>
+        <form id="registrationForm" onsubmit="return validateFormAndAddData()">
+            <label for="nama">Nama (minimal 10 karakter):</label>
+            <input type="text" id="nama" name="nama" required minlength="10"><br><br>
+            
+            <label for="umur">Umur (minimal 25 tahun):</label>
+            <input type="number" id="umur" name="umur" required min="25"><br><br>
+            
+            <label for="uang">Uang Sangu (minimal 100 ribu dan maksimal 1 juta):</label>
+            <input type="number" id="uang" name="uang" required min="100000" max="1000000"><br><br>
+            
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    
+    <div id="ListPendaftar" class="tabcontent">
+        <h2>List Pendaftar</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Umur</th>
+                    <th>Uang Sangu</th>
+                </tr>
+            </thead>
+            <tbody id="listData"></tbody>
+        </table>
+        <p>Resume:</p>
+        <p>Rata-rata pendaftar memiliki uang sangu sebesar <span id="avgUangSangu"></span> dengan rata-rata umur <span id="avgUmur"></span></p>
+    </div>
+    
+    <script>
+        // Fungsi untuk menampilkan tab
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // Array untuk menyimpan data pendaftar
+        var pendaftar = [];
+
+        // Validasi form dan tambahkan data ke tabel List Pendaftar
+        function validateFormAndAddData() {
+            var nama = document.getElementById("nama").value;
+            var umur = document.getElementById("umur").value;
+            var uang = document.getElementById("uang").value;
+            
+            if (nama.length < 10) {
+                alert("Nama harus memiliki minimal 10 karakter.");
+                return false;
+            }
+            
+            if (umur < 25) {
+                alert("Umur harus minimal 25 tahun.");
+                return false;
+            }
+            
+            if (uang < 100000 || uang > 1000000) {
+                alert("Uang Sangu harus minimal 100 ribu dan maksimal 1 juta.");
+                return false;
+            }
+
+            // Menambahkan data ke tabel List Pendaftar
+            var table = document.getElementById("listData");
+            var newRow = table.insertRow(-1);
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+            cell1.innerHTML = nama;
+            cell2.innerHTML = umur;
+            cell3.innerHTML = uang;
+
+            // Menyimpan data pendaftar ke dalam array
+            pendaftar.push({
+                nama: nama,
+                umur: umur,
+                uang: uang
+            });
+
+            // Menghitung rata-rata uang sangu dan umur
+            var sumUangSangu = 0;
+            var sumUmur = 0;
+
+            for (var i = 0; i < pendaftar.length; i++) {
+                sumUangSangu += parseInt(pendaftar[i].uang);
+                sumUmur += parseInt(pendaftar[i].umur);
+            }
+
+            var avgUangSangu = sumUangSangu / pendaftar.length;
+            var avgUmur = sumUmur / pendaftar.length;
+
+            // Menampilkan rata-rata pada resume
+            document.getElementById("avgUangSangu").innerHTML = avgUangSangu.toFixed(2);
+            document.getElementById("avgUmur").innerHTML = avgUmur.toFixed(2);
+
+            // Reset form setelah data ditambahkan
+            document.getElementById("registrationForm").reset();
+
+            return false;
+        }
+    </script>
+</body>
+</html>
